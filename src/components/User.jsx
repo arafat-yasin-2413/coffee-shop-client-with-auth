@@ -1,4 +1,4 @@
-import React, { use } from "react";
+import React from "react";
 import { FaRegEye } from "react-icons/fa";
 import { MdDelete, MdOutlineEdit } from "react-icons/md";
 import Swal from "sweetalert2";
@@ -20,7 +20,7 @@ const User = ({ user, index, users, setUsers }) => {
 			confirmButtonText: "Yes, delete it!",
 		}).then((result) => {
 			if (result.isConfirmed) {
-				fetch(`http://localhost:3000/users/${id}`, {
+				fetch(`https://coffee-shop-server-silk.vercel.app/users/${id}`, {
 					method: "DELETE",
 				})
 					.then((res) => res.json())
