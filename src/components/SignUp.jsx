@@ -21,14 +21,24 @@ const SignUp = () => {
         
 
         const newUser = Object.fromEntries(formData.entries());
-        const {email, password, ...userProfileInfo} = newUser;
+        const {email, password, ...restFormData} = newUser;
         
-        console.log(email, password, userProfileInfo);
+
+      
 
         // create user with firebase
         createUser(email, password)
         .then(result => {
             console.log(result.user);
+
+            const userProfileInfo = {
+                email, 
+                ...restFormData,
+                creationTime : result.user?.metadata?.creationTime,
+                lastSignInTime : result.user?.metadata?.lastSignInTime,
+            }
+
+
 
             // now send "userProfileInfo" to the db
             fetch('http://localhost:3000/users', {
