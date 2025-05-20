@@ -21,7 +21,7 @@ const SignIn = () => {
             }
             // update last sign in time in db 
 
-            fetch(`http://localhost:3000/users/`, {
+            fetch(`https://coffee-shop-server-silk.vercel.app/users/`, {
                 method: 'PATCH',
                 headers: {
                     'content-type': 'application/json'

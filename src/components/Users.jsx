@@ -25,7 +25,8 @@ const Users = () => {
 					<tbody>
 						{/* row 1 */}
 
-						{users.map((user, index) => (
+						{
+                        users.map((user, index) => (
 							<User
 								key={user._id}
 								user={user}
