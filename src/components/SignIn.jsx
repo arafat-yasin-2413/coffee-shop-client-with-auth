@@ -1,10 +1,44 @@
-import React from "react";
+import React, { use } from "react";
+import { AuthContext } from "../contexts/AuthContext";
 
 const SignIn = () => {
 
+    const { signInUser } = use(AuthContext)
 
     const handleSignIn = (e)=>{
         e.preventDefault();
+
+        const form = e.target;
+        const email = form.email.value;
+        const password = form.password.value;
+        
+        signInUser(email, password)
+        .then(result=> {
+            console.log(result.user);
+            const signInInfo = {
+                email, 
+                lastSignInTime: result.user?.metadata?.lastSignInTime
+            }
+            // update last sign in time in db 
+
+            fetch(`http://localhost:3000/users/`, {
+                method: 'PATCH',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(signInInfo)
+            })
+            .then(res=>res.json())
+            .then(data => {
+                console.log('after update patch: ', data);
+            })
+
+
+
+        })
+        .catch(error=>{
+            console.log(error);
+        })
     }
 
 	return (

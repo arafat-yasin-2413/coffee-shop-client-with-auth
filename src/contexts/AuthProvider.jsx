@@ -2,7 +2,9 @@ import React from 'react';
 import { AuthContext } from './AuthContext';
 import { createUserWithEmailAndPassword } from 'firebase/auth/cordova';
 import { auth } from '../firebase/firebase.init';
-import { deleteUser } from 'firebase/auth';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+
+
 
 const AuthProvider = ({children}) => {
 
@@ -15,15 +17,16 @@ const AuthProvider = ({children}) => {
         return createUserWithEmailAndPassword(auth,email, password);
     }
 
-    const userDelete = () =>{
-        const user = auth.currentUser;
-        return deleteUser(user);
+    const signInUser = (email, password) =>{
+        return signInWithEmailAndPassword(auth, email, password)
     }
+
 
 
     const userInfo = {
         createUser,
-        userDelete,
+        signInUser,
+       
         
     }
 

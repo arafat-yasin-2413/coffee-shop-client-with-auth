@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 import { AuthContext } from "../contexts/AuthContext";
 
 const User = ({ user, index, users, setUsers }) => {
-    const {userDelete} = use(AuthContext)
+
 	console.log(user);
 	const { _id, name, email, phone, photo, address } = user || {};
 
@@ -33,7 +33,7 @@ const User = ({ user, index, users, setUsers }) => {
 							setUsers(remainingUsers);
 
 							// TODO: Delete user from firebase
-                            
+
 							Swal.fire({
 								title: "Deleted!",
 								text: "User has been deleted.",
